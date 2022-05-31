@@ -4,15 +4,15 @@
 #and from examples over at stackoverflow like over at https://stackoverflow.com/questions/370075/command-line-world-clock
 
 # create preference file .world-clock.zones, if it's missing
-if [ ! -f ~/GitFiles/mac_dotfiles/cli_clocks/.world-clock.zones ]; then
+if [ ! -f ~/GitFiles/cli_clocks/.world-clock.zones ]; then
    echo "Europe/London
    Europe/Paris
    Asia/Tokyo
    America/St_Johns
-   Brazil/West" > ~/GitFiles/mac_dotfiles/cli_clocks/.world-clock.zones
+   Brazil/West" > ~/GitFiles/cli_clocks/.world-clock.zones
 fi
 
-: ${WORLDCLOCK_ZONES:=~/GitFiles/mac_dotfiles/cli_clocks/.world-clock.zones}
+: ${WORLDCLOCK_ZONES:=~/GitFiles/cli_clocks/.world-clock.zones}
 : ${WORLDCLOCK_FORMAT:='+%Y-%m-%d %H:%M:%S %Z'}
 
 function world-clock ()
