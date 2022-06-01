@@ -17,27 +17,32 @@ fi
 
 function world-clock ()
 {
-   echo
-   echo "               CLI World Clock:"
-   echo
    local_time=$(date "$WORLDCLOCK_FORMAT")
-   echo "Local Time            $local_time"
-   echo
-
+   echo "Local Time             $local_time"
+   echo "==============================================="
    while read zone
    do echo $zone '!' $(TZ=$zone date "$WORLDCLOCK_FORMAT")
    done < $WORLDCLOCK_ZONES |
       awk -F '!' '{ printf "%-20s  %s\n", $1, $2;}' |
       sort -b -r -k2,2 -k3,3
-   echo
 }
 
+function date-ncal ()
+{
+   echo
+   cal=$(ncal -w3)
+   echo "$cal"
+}
+
+A
 export -f world-clock
+export -f date-ncal
 clear
 
 while true;
 do
       world-clock;
-         sleep 1;
+      date-ncal
+         sleep 60;
             clear
          done
