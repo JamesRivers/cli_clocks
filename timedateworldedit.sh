@@ -37,7 +37,6 @@ function world_clock () {
       sort -b -r -k2,2 -k3,3
 }
 
-<<<<<<< HEAD
 function date-ncal ()
 {
    echo
@@ -59,8 +58,6 @@ function date-ncal ()
 
    echo -e "$cal_formatted"
 }
-
-
 
 export -f world-clock
 export -f date-ncal
@@ -100,7 +97,6 @@ export -f date_ncal
 export -f date_ncal3
 
 # Clear the screen and run the world clock and calendar
->>>>>>> 7c183f40fce83543964a80402f6250397c2461ca
 clear
 
 while true; do
