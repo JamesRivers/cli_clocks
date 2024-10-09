@@ -1,7 +1,7 @@
 #!/bin/zsh
 # Command-line world clock by PPC 9/1/2022, GPL license
-#Adapted from https://gist.github.com/rangersmyth74/4c7e291b64d48c1beb7029e9b07b6bca
-#and from examples over at stackoverflow like over at https://stackoverflow.com/questions/370075/command-line-world-clock
+# Adapted from https://gist.github.com/rangersmyth74/4c7e291b64d48c1beb7029e9b07b6bca
+# and from examples over at stackoverflow like over at https://stackoverflow.com/questions/370075/command-line-world-clock
 
 # create preference file .world-clock.zones, if it's missing
 if [ ! -f ~/GitFiles/cli_clocks/.world-clock.zones ]; then
@@ -30,26 +30,21 @@ function world-clock ()
 function date-ncal ()
 {
    echo
-   cal=$(ncal -w3)
+   cal=$(cal)
 
-   # Get the current day
+   # Get the current day and mark it with an asterisk (*)
    today=$(date +%e)
-   cal_formatted=""
-
-   # ANSI escape code for bold text
-   bold=$(tput bold)
-   reset=$(tput sgr0)
-
+   cal_marked=""
    while IFS= read -r line; do
-       # Use sed to replace the current day with bold text
-       line=$(echo "$line" | sed "s/$today/${bold}$today${reset}/")
-       cal_formatted+="$line\n"
+       if [[ $line == *"$today "* ]]; then
+           cal_marked+="$(echo "$line" | sed "s/$today/*$today/")\n"
+       else
+           cal_marked+="$line\n"
+       fi
    done <<< "$cal"
 
-   echo -e "$cal_formatted"
+   echo -e "$cal_marked"
 }
-
-
 
 export -f world-clock
 export -f date-ncal
@@ -59,6 +54,6 @@ while true;
 do
       world-clock;
       date-ncal
-         sleep 60;
-            clear
-         done
+      sleep 1; # Change this to 1 second
+      clear
+done
